@@ -1,7 +1,7 @@
 
 //Al cargar la venana 
 window.onload = (e) => {
-    const frases = ["console.log('hola mundo')", "que feo es programar en C", "hagan git pull"]
+    const frases = ["console.log('hola mundo')", "odio programar en C", "por favor hacer git pull antes de pushear "]
     const clase = ["frase1", "frase2", "frase3"] //Nombre de las clases con los estilos para cada frase 
 
     const index = Math.round(Math.random()*10) % 3; //Retorna un entero aleatorio entre 0 y 2 para usarlo como índice
@@ -48,7 +48,7 @@ function signo(){
     document.getElementById("signo").style.visibility = "hidden"
     document.getElementById("section-aside-main").innerHTML = ""
     document.getElementById("section-aside-main").appendChild(document.createElement("iframe")).id = "video"
-    document.getElementById("video").src = "https://www.youtube-nocookie.com/embed/8t9UWtL5wDI?controls=0";
+    document.getElementById("video").src = "https://www.youtube-nocookie.com/embed/8t9UWtL5wDI?controls=0"
     document.getElementById("video").width = "100%"
     document.getElementById("video").height = "100%"
     document.body.style.overflow = "hidden"
