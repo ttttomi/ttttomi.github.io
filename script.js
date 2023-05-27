@@ -49,9 +49,10 @@ function signo(){
     document.getElementById("main").innerHTML = ""
     document.getElementById("main").appendChild(document.createElement("iframe")).id = "video"
     document.getElementById("video").src = "https://www.youtube-nocookie.com/embed/8t9UWtL5wDI?controls=0&autoplay=1";
-    document.getElementById("video").width = "1920"
-    document.getElementById("video").height = "1080"
+    document.getElementById("video").width = "100%"
+    document.getElementById("video").height = "100%"
     document.getElementById("video").allow = "autoplay"
+    document.body.style.overflow = "hidden"
 
 }
 
