@@ -15,6 +15,7 @@ header{
     padding: 10px;
     border: 1px black solid;
     padding-left: 25px;
+    background-color: rgb(125, 200, 225);
 }
 
 #nombre{
@@ -24,22 +25,29 @@ header{
     font-size: 15pt;
 }
 
-section{
+body > section{
     display: flex;
     flex-grow: 1;
 }
 
 aside{ 
-    min-width: 20%;
-    border-right: 1px black solid;
-    border-left: 1px black solid;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: 30px; 
-    padding: 20px;
+    min-width: 20%;
+    border-right: 1px black solid;
+    border-left: 1px black solid;
     font-size: 20px;
+    padding: 20px;
+}
+
+aside > section {
+    gap: 30px; 
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
     text-align: center;
 }
 
@@ -96,10 +104,28 @@ main > p{
 
 footer{
     display: flex;
-    justify-content: flex-end;
     border: 1px black solid;
     padding: 10px;
 }
 
-/*    background: repeating-linear-gradient(-45deg,transparent, transparent 8px, rgba(255, 0, 0, 0.3) 8px, rgba(255, 0, 0, 0.3) 16px);
-*/
+#signo {
+    align-self: flex-end;
+    margin: 0;
+    font-weight: bold;
+    padding: 4px 10px;
+    background: repeating-linear-gradient(-45deg,transparent, transparent 8px, red 8px, red 16px);
+    border: 1px black solid;
+}
+
+#signo:hover{
+    cursor: pointer;
+}
+
+#tecno {
+    padding: 5px;
+    flex-grow: 1;
+    text-align: right;
+    margin: 0;
+}
+
+

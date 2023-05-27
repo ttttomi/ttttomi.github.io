@@ -1,7 +1,7 @@
 
 //Al cargar la venana 
 window.onload = (e) => {
-    const frases = ["console.log('hola mundo')", "que feo es programar en C", "git commit -m 'primer commit'"]
+    const frases = ["console.log('hola mundo')", "que feo es programar en C", "hagan git pull"]
     const clase = ["frase1", "frase2", "frase3"] //Nombre de las clases con los estilos para cada frase 
 
     const index = Math.round(Math.random()*10) % 3; //Retorna un entero aleatorio entre 0 y 2 para usarlo como índice
@@ -29,8 +29,7 @@ function apiNASA(){
 
 
 //Api de OpenWeather que retorna características del clima 
-function apiClima(){
-    
+function apiClima(){    
     //Le envío como parámetros la latitud y longitud de La Plata, el idioma y el formato de las unidades (métrico)
     fetch("https://api.openweathermap.org/data/2.5/weather?lat=-34.92&lon=-57.95&appid=a13df24921a2b9f0449648b341a424ce&lang=es&units=metric", {method: "GET"})
     .then(resp => resp.json())
@@ -43,5 +42,16 @@ function apiClima(){
         document.getElementById("api1").className = "clicked";
         document.getElementById("api2").className = "";
     });
+}
+
+function signo(){
+    document.getElementById("signo").style.visibility = "hidden"
+    document.getElementById("main").innerHTML = ""
+    document.getElementById("main").appendChild(document.createElement("iframe")).id = "video"
+    document.getElementById("video").src = "https://www.youtube-nocookie.com/embed/8t9UWtL5wDI?controls=0&autoplay=1";
+    document.getElementById("video").width = "550"
+    document.getElementById("video").height = "315"
+    document.getElementById("video").allow = "autoplay"
+
 }
 
