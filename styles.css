@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100;400;700&display=swap');
+
+body{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    height: 100%;
+    font-family: "IBM Plex Mono";
+    margin: 0;
+    color: black; 
+}
+
+header{
+    display: flex;
+    padding: 10px;
+    border: 1px black solid;
+    padding-left: 25px;
+}
+
+#nombre{
+    flex-grow: 1;
+    text-align: center;
+    align-self: center;
+    font-size: 15pt;
+}
+
+section{
+    display: flex;
+    flex-grow: 1;
+}
+
+aside{ 
+    min-width: 20%;
+    border-right: 1px black solid;
+    border-left: 1px black solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px; 
+    padding: 20px;
+    font-size: 20px;
+    text-align: center;
+}
+
+a{
+    box-shadow: 1px 1px 0px black;
+    border: black solid 1px;
+    margin: -1px;
+    padding: 0px 5px;
+}
+
+a:hover {
+    box-shadow: none;
+    cursor: pointer;
+    border: 1px black solid;
+}
+
+.clicked{
+    box-shadow: 1px 1px 0px black inset;
+    box-shadow: none;
+    padding: 0px 5px;
+    margin: -1px;
+    border: solid black 1px;
+    color: red;
+}
+
+main {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px black solid;
+    text-align: center;
+}
+
+main > img{
+    max-width: 40%;
+}
+
+main > p{
+    font-size: 10pt;
+    max-width: 80%;
+    text-align: center;
+    padding: 20px;
+}
+
+#frase{
+    font-size: 30pt;
+}
+
+.frase1{ text-shadow: 2px 2px #F0F; }
+.frase2{ text-shadow: 0px 3px red;}
+.frase3{ text-shadow: -2px 2px 5px rgb(0, 255, 255) }
+
+footer{
+    display: flex;
+    justify-content: flex-end;
+    border: 1px black solid;
+    padding: 10px;
+}
+
+/*    background: repeating-linear-gradient(-45deg,transparent, transparent 8px, rgba(255, 0, 0, 0.3) 8px, rgba(255, 0, 0, 0.3) 16px);
+*/
