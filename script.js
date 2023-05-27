@@ -53,6 +53,5 @@ function signo(){
     document.getElementById("video").height = "100%"
     document.getElementById("video").allow = "autoplay"
     document.body.style.overflow = "hidden"
-
 }
 
