@@ -15,7 +15,7 @@ header{
     padding: 10px;
     border: 1px black solid;
     padding-left: 25px;
-    background-color: rgb(125, 200, 225);
+    background-color: #88c5ea;
 }
 
 #nombre{
@@ -91,16 +91,17 @@ main > p{
     font-size: 10pt;
     max-width: 80%;
     text-align: center;
-    padding: 20px;
 }
+
+main > h1 { padding: 20px;}
 
 #frase{
     font-size: 30pt;
 }
 
-.frase1{ text-shadow: 2px 2px #F0F; }
-.frase2{ text-shadow: 0px 3px red;}
-.frase3{ text-shadow: -2px 2px 5px rgb(0, 255, 255) }
+.frase1{ text-shadow: 1px -2px #F0F}
+.frase2{ text-shadow: 0px 0px 5px  red}
+.frase3{ text-shadow: -2px 2px #88c5ea}
 
 footer{
     display: flex;
@@ -113,12 +114,15 @@ footer{
     margin: 0;
     font-weight: bold;
     padding: 4px 10px;
-    background: repeating-linear-gradient(-45deg,transparent, transparent 8px, red 8px, red 16px);
     border: 1px black solid;
+    background: repeating-linear-gradient(-45deg,transparent, transparent 8px, red 8px, red 16px);
+    opacity: 0.2;
+
 }
 
 #signo:hover{
     cursor: pointer;
+    opacity: 1;
 }
 
 #tecno {

@@ -1,7 +1,6 @@
-
 //Al cargar la venana 
 window.onload = (e) => {
-    const frases = ["console.log('hola mundo')", "odio programar en C", "por favor hacer git pull antes de pushear "]
+    const frases = ["console.log('hola mundo')", "q feo es programar en C", "manténgase hidratado"]
     const clase = ["frase1", "frase2", "frase3"] //Nombre de las clases con los estilos para cada frase 
 
     const index = Math.round(Math.random()*10) % 3; //Retorna un entero aleatorio entre 0 y 2 para usarlo como índice
@@ -10,9 +9,10 @@ window.onload = (e) => {
     document.getElementById("frase").className = clase[index]  //Aplica la clase que le dará el estilo
 }
 
-
 //Api de la NASA que devuelve la fotografía astronómica del día
 function apiNASA(){
+    f1 == false ? f1 = true : f1 = false
+    checkSigno();
     fetch("https://api.nasa.gov/planetary/apod?api_key=LFvpOZF2x3aVqgtkcnyT7aEagWjBMIrM1AmoEapu", {method: "GET"})
     .then(resp => resp.json())
     .then((r) => { 
@@ -27,14 +27,15 @@ function apiNASA(){
     })
 }
 
-
 //Api de OpenWeather que retorna características del clima 
 function apiClima(){    
+    f2 == false ? f2 = true : f2 = false
+    checkSigno();
     //Le envío como parámetros la latitud y longitud de La Plata, el idioma y el formato de las unidades (métrico)
     fetch("https://api.openweathermap.org/data/2.5/weather?lat=-34.92&lon=-57.95&appid=a13df24921a2b9f0449648b341a424ce&lang=es&units=metric", {method: "GET"})
     .then(resp => resp.json())
     .then ((r) => {
-        document.getElementById("main").innerHTML = `<p>El clima en <b style="color:blue"> ${r.name} </b> es ${r.weather[0].description} y la temperatura es de ${r.main.temp} ºC.</p>`
+        document.getElementById("main").innerHTML = `<p>El clima en <b style="color:#88c5ea;"> ${r.name} </b> es ${r.weather[0].description} y la temperatura es de ${r.main.temp} ºC.</p>`
         document.getElementById("main").appendChild(document.createElement("img")).src = `https://openweathermap.org/img/wn/${r.weather[0].icon}@2x.png`
         document.getElementById("home").style.visibility = "visible"
 
@@ -54,3 +55,5 @@ function signo(){
     document.body.style.overflow = "hidden"
 }
 
+let f1=false; let f2=false;
+function checkSigno(){if(f1 == true && f2 == true){document.getElementById("signo").style.visibility = "visible"}}
