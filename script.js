@@ -36,6 +36,5 @@ function apiClima(){
     .then ((r) => {
         document.getElementById("main").innerHTML = `<p>El clima en <b style="color:#88c5ea;"> ${r.name} </b> es ${r.weather[0].description} y la temperatura es de ${r.main.temp} ºC.</p>`
         document.getElementById("main").appendChild(document.createElement("img")).src = `https://openweathermap.org/img/wn/${r.weather[0].icon}@2x.png`
-        document.getElementById("main").style = "font-size: 10pt!" 
     });
 }
