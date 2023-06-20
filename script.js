@@ -1,59 +1,41 @@
 //Al cargar la venana 
 window.onload = (e) => {
-    const frases = ["console.log('hola mundo')", "q feo es programar en C", "manténgase hidratado"]
+    const frases = ["console.log('hola mundo')", "q feo es programar en C", "tengo sueño"]
     const clase = ["frase1", "frase2", "frase3"] //Nombre de las clases con los estilos para cada frase 
 
-    const index = Math.round(Math.random()*10) % 3; //Retorna un entero aleatorio entre 0 y 2 para usarlo como índice
+    const index = Math.round(Math.random()*10) % 3; //Retorna un entero aleatorio entre 0 y 2 para usarlo como índice para el arreglo de frases
 
     document.getElementById("frase").innerHTML = frases[index] //Aplica la frase aleatoria
-    document.getElementById("frase").className = clase[index]  //Aplica la clase que le dará el estilo
+    document.getElementById("frase").className = clase[index]  //Aplica la clase que le da el estilo
 }
 
 //Api de la NASA que devuelve la fotografía astronómica del día
-function apiNASA(){
-    f1 == false ? f1 = true : f1 = false
-    checkSigno();
+function apiNASA(){        
+    //Cambio el estilo de los botones para que aparezca presionado
+    document.getElementById("api2").className = "clicked";
+    document.getElementById("api1").className = "";
+
     fetch("https://api.nasa.gov/planetary/apod?api_key=LFvpOZF2x3aVqgtkcnyT7aEagWjBMIrM1AmoEapu", {method: "GET"})
     .then(resp => resp.json())
     .then((r) => { 
         document.getElementById("main").innerHTML = ""  //Quito los elementos que hay en el main
         document.getElementById("main").appendChild(document.createElement("h1")).innerHTML = `${r.title}` //Titulo de la fotografía
-        document.getElementById("main").appendChild(document.createElement("img")).src = `${r.url}` //Al main le agrego una etiqueta img con la url que recupero del JSON
+        document.getElementById("main").appendChild(document.createElement("img")).src = `${r.url}` //Al main le agrego una etiqueta img con la url de la imagen
         document.getElementById("main").appendChild(document.createElement("p")).innerHTML = `${r.explanation}` //Descripción de la fotografía
-        document.getElementById("home").style.visibility= "visible"
-        //Cambio el estilo de los botones para que aparezca presionado
-        document.getElementById("api2").className = "clicked";
-        document.getElementById("api1").className = "";
     })
 }
 
 //Api de OpenWeather que retorna características del clima 
-function apiClima(){    
-    f2 == false ? f2 = true : f2 = false
-    checkSigno();
+function apiClima(){   
+    //Cambio el estilo de los botones para que aparezca presionado
+    document.getElementById("api1").className = "clicked";
+    document.getElementById("api2").className = "";
     //Le envío como parámetros la latitud y longitud de La Plata, el idioma y el formato de las unidades (métrico)
     fetch("https://api.openweathermap.org/data/2.5/weather?lat=-34.92&lon=-57.95&appid=a13df24921a2b9f0449648b341a424ce&lang=es&units=metric", {method: "GET"})
     .then(resp => resp.json())
     .then ((r) => {
         document.getElementById("main").innerHTML = `<p>El clima en <b style="color:#88c5ea;"> ${r.name} </b> es ${r.weather[0].description} y la temperatura es de ${r.main.temp} ºC.</p>`
         document.getElementById("main").appendChild(document.createElement("img")).src = `https://openweathermap.org/img/wn/${r.weather[0].icon}@2x.png`
-        document.getElementById("home").style.visibility = "visible"
-
-        //Cambio el estilo de los botones para que aparezca presionado
-        document.getElementById("api1").className = "clicked";
-        document.getElementById("api2").className = "";
+        document.getElementById("main").style = "font-size: 10pt!" 
     });
 }
-
-function signo(){
-    document.getElementById("signo").style.visibility = "hidden"
-    document.getElementById("section-aside-main").innerHTML = ""
-    document.getElementById("section-aside-main").appendChild(document.createElement("iframe")).id = "video"
-    document.getElementById("video").src = "https://www.youtube-nocookie.com/embed/8t9UWtL5wDI?controls=0"
-    document.getElementById("video").width = "100%"
-    document.getElementById("video").height = "100%"
-    document.body.style.overflow = "hidden"
-}
-
-let f1=false; let f2=false;
-function checkSigno(){if(f1 == true && f2 == true){document.getElementById("signo").style.visibility = "visible"}}
