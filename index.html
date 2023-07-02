@@ -1,32 +1,49 @@
 <!DOCTYPE html>
-<html lang="es" style="height: 100%;">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js"></script>
-    <title>T.P. 1, Catellani Tomás</title>
+    <title>TP-2</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body>
     <header>
-        <img id="logo" src="https://thumbs.gfycat.com/FelineThornyCardinal-size_restricted.gif" height="100"/>
-        <h4 id="nombre"> T.P. Nro. 1 - Catellani, Tomás </h4>
+        <p>Grupo 16</p>
     </header>
-    <section id="section-aside-main">
         <aside>
-            <section>
-                <a id="api1" onclick="apiClima()">API CLIMA</a> <!--Retorna el clima según latitud y longitud-->
-                <a id="api2" onclick="apiNASA()">API N.A.S.A.</a> <!--Retorna la foto astronómica del día-->
-            </section>
+            <button id="btn-nueva" onclick="nuevaConsulta()" style="display: none;">Crear nueva consulta</button>
+            <button id="btn-consultar" onclick="consultar()">Consultar API</button>
+            <button id="btn-mostrar" onclick="mostrar()" disabled>Mostrar datos</button>
         </aside>
-        <main id="main">
-            <h1 id="frase"> </h1>
-            <p id="mensaje">A lo largo de la materia espero aprender los conocimientos básicos de programación web</p>
+        <main>
+            <fieldset id="contenedor-fechas">
+                <p id="texto-desde">Desde</p>
+                <input type="date" id="fecha-desde" onchange="fechaValidacion(this)">
+                
+                <p id="texto-hasta">Hasta</p>
+                <input type="date" id="fecha-hasta" onchange="fechaValidacion(this)">
+                
+                <p class="aclaracion" id="error" style="display: none;">*la fecha debe ser anterior al día de hoy</p>
+                <p class="aclaracion" id="aclaracion">*si no se selecciona fecha se consultará por defecto el histórico</p>
+            </fieldset>
+            <fieldset id="contenedor-tipo-transporte">
+                <input type="checkbox" id="check-todo" class="check">
+                <label>Todo</label>
+                
+                <input type="checkbox" id="check-tren" class="check">
+                <label>Tren</label>
+                
+                <input type="checkbox" id="check-subte" class="check">
+                <label>Subte</label>
+                
+                <input type="checkbox" id="check-bondi" class="check">
+                <label>Bondi</label>
+                <p class="aclaracion" id="aclaracion">*si no se selecciona una opción se consultará por defecto "todo"</p>
+            </fieldset>
         </main>
-    </section>
     <footer>
-        <p id="tecno"> Tecnología y Gestión Web </p>
+        <p>Tecnología y Gestión Web</p>
     </footer>
-    
+    <script src="./script.js"></script>
 </body>
 </html>

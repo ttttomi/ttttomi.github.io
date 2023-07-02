@@ -1,40 +1,95 @@
-//Al cargar la venana 
-window.onload = (e) => {
-    const frases = ["console.log('hola mundo')", "q feo es programar en C", "tengo sueño"]
-    const clase = ["frase1", "frase2", "frase3"] //Nombre de las clases con los estilos para cada frase 
+function requestAPI(){
+    //en la HTMLCollection "checkColl" obtengo todos los Checkboxes de los tipos transportes
+    let checkColl = document.getElementsByClassName("check")
+    
+    //En el Array "seleccionados" guardo solo los transportes que esten seleccionados 
+    let seleccionados = new Array
+    for (let i = 0; i < checkColl.length; i++) {
+        if (checkColl.item(i).checked) {
+            seleccionados.push(checkColl.item(i))
+        }
+    }
 
-    const index = Math.round(Math.random()*10) % 3; //Retorna un entero aleatorio entre 0 y 2 para usarlo como índice para el arreglo de frases
-
-    document.getElementById("frase").innerHTML = frases[index] //Aplica la frase aleatoria
-    document.getElementById("frase").className = clase[index]  //Aplica la clase que le da el estilo
-}
-
-//Api de la NASA que devuelve la fotografía astronómica del día
-function apiNASA(){        
-    //Cambio el estilo de los botones para que aparezca presionado
-    document.getElementById("api2").className = "clicked";
-    document.getElementById("api1").className = "";
-
-    fetch("https://api.nasa.gov/planetary/apod?api_key=LFvpOZF2x3aVqgtkcnyT7aEagWjBMIrM1AmoEapu", {method: "GET"})
-    .then(resp => resp.json())
-    .then((r) => { 
-        document.getElementById("main").innerHTML = ""  //Quito los elementos que hay en el main
-        document.getElementById("main").appendChild(document.createElement("h1")).innerHTML = `${r.title}` //Titulo de la fotografía
-        document.getElementById("main").appendChild(document.createElement("img")).src = `${r.url}` //Al main le agrego una etiqueta img con la url de la imagen
-        document.getElementById("main").appendChild(document.createElement("p")).innerHTML = `${r.explanation}` //Descripción de la fotografía
-    })
-}
-
-//Api de OpenWeather que retorna características del clima 
-function apiClima(){   
-    //Cambio el estilo de los botones para que aparezca presionado
-    document.getElementById("api1").className = "clicked";
-    document.getElementById("api2").className = "";
-    //Le envío como parámetros la latitud y longitud de La Plata, el idioma y el formato de las unidades (métrico)
-    fetch("https://api.openweathermap.org/data/2.5/weather?lat=-34.92&lon=-57.95&appid=a13df24921a2b9f0449648b341a424ce&lang=es&units=metric", {method: "GET"})
-    .then(resp => resp.json())
-    .then ((r) => {
-        document.getElementById("main").innerHTML = `<p>El clima en <b style="color:#88c5ea;"> ${r.name} </b> es ${r.weather[0].description} y la temperatura es de ${r.main.temp} ºC.</p>`
-        document.getElementById("main").appendChild(document.createElement("img")).src = `https://openweathermap.org/img/wn/${r.weather[0].icon}@2x.png`
+    //Guardo en un Array los "id" de los tipos de transportes seleccionados, que necesita la API para la consulta
+    let ids = new Array;
+    seleccionados.forEach(e => {
+        switch (e.id) {
+            case "check-todo":
+                ids.push("npogi2im")
+                break;
+                
+            case "check-tren":
+                ids.push("678arlyc")
+                break;
+                
+            case "check-subte":
+                ids.push("s9v4z3od")
+                break;
+                
+            case "check-bondi":
+                ids.push("twsi8s3j")
+                break;
+        }
     });
+
+    //Si no hay transportes seleccionados, utilizo por defecto el "id" de "todo"
+    if (seleccionados.length == 0) {
+        ids.push("npogi2im")
+    }
+
+    let url = "https://apis.datos.gob.ar/series/api/series?&format=json&metadata=none"
+    let fechaIni = document.getElementById("fecha-desde").value
+    let fechaFin = document.getElementById("fecha-hasta").value
+
+    //Construyo la url
+    url += "&ids=" + ids.toString()
+    url += "&start_date=" + fechaIni
+    url += "&end_date=" + fechaFin
+
+    $.ajax({
+        type: "GET",
+        url: url,
+        dataType: "json",
+        success: (response) => {
+            console.log(response);
+        },
+        error: (error) => {
+            console.log(error);
+        }
+    });
+}
+
+//Valida que la fecha para consultar no supere la fecha de hoy
+function fechaValidacion(elemento){
+    let today = new Date().toISOString().slice(0,10)
+
+    if (Date.parse(elemento.value) > Date.parse(today)) {
+        //Si la fecha es inválida aplica un estilo de error
+        elemento.style.color = "var(--error-color)"
+        document.getElementById("error").style.display = "block"
+    } else {
+        //Si la fecha es válida aplica el estilo por defecto 
+        elemento.style.color = "var(--main-color)"
+        document.getElementById("error").style.display = "none"
+    }
+}
+
+function consultar(){
+    document.getElementById("btn-mostrar").disabled = false
+    requestAPI();
+}
+
+function mostrar(){
+    document.getElementById("btn-consultar").style.display = "none"
+    document.getElementById("btn-nueva").style.display = "block"
+    document.getElementsByTagName("main")[0].children.item(0).style.display = "none"
+    document.getElementsByTagName("main")[0].children.item(1).style.display = "none"
+}
+
+function nuevaConsulta() {
+    document.getElementById("btn-nueva").style.display = "none"
+    document.getElementById("btn-consultar").style.display = "block"
+    document.getElementById("btn-mostrar").disabled = true
+    document.getElementsByTagName("main")[0].children.item(0).style.display = "grid"
+    document.getElementsByTagName("main")[0].children.item(1).style.display = "grid"
 }
