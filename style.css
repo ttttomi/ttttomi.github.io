@@ -111,8 +111,8 @@ main > * {
 input[type="date"] { 
     color: var(--main-color);
     font-family: var(--fuente);
-    height: 50px;
     width: 200px;
+    height: minmax(50px, fit-content);
     font-size: 15pt;
 }
 
