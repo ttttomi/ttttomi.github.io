@@ -8,11 +8,12 @@
 </head>
 <body>
     <header>
-        <p>Grupo 16</p>
+        <p>Trabajo práctico nro. 2 | Grupo 16</p>
     </header>
         <aside>
-            <button id="btn-nueva" onclick="nuevaConsulta()" style="display: none;">Crear nueva consulta</button>
+            <button id="btn-nueva" onclick="nuevaConsulta()" style="display: none;">Generar nueva consulta</button>
             <button id="btn-consultar" onclick="consultar()">Consultar API</button>
+            <p id="cargando" style="visibility: hidden;">Cargando</p>
             <button id="btn-mostrar" onclick="mostrar()" disabled>Mostrar datos</button>
         </aside>
         <main>
@@ -23,22 +24,22 @@
                 <p id="texto-hasta">Hasta</p>
                 <input type="date" id="fecha-hasta" onchange="fechaValidacion(this)">
                 
-                <p class="aclaracion" id="error" style="display: none;">*la fecha debe ser anterior al día de hoy</p>
-                <p class="aclaracion" id="aclaracion">*si no se selecciona fecha se consultará por defecto el histórico</p>
+                <p class="aclaracion" id="error" style="display: none;"></p>
+                <p class="aclaracion" id="aclaracion">(si no se selecciona fecha se consultará por defecto el inicio del dataset)</p>
             </fieldset>
             <fieldset id="contenedor-tipo-transporte">
-                <input type="checkbox" id="check-todo" class="check">
-                <label>Todo</label>
+                <input type="checkbox" id="check-todo" class="check" name="check-todo" checked>
+                <label for="check-todo">Todo</label>
                 
-                <input type="checkbox" id="check-tren" class="check">
-                <label>Tren</label>
+                <input type="checkbox" id="check-tren" class="check" name="check-todo">
+                <label for="check-tren">Tren</label>
                 
-                <input type="checkbox" id="check-subte" class="check">
-                <label>Subte</label>
+                <input type="checkbox" id="check-subte" class="check" name="check-todo">
+                <label for="check-subte">Subte</label>
                 
-                <input type="checkbox" id="check-bondi" class="check">
-                <label>Bondi</label>
-                <p class="aclaracion" id="aclaracion">*si no se selecciona una opción se consultará por defecto "todo"</p>
+                <input type="checkbox" id="check-bondi" class="check" name="check-todo">
+                <label for="check-bondi">Bondi</label>
+                <p class="aclaracion" id="aclaracion">(si no se selecciona opción se consultará por defecto "todo")</p>
             </fieldset>
         </main>
     <footer>

@@ -3,8 +3,9 @@
 :root {
     --bordes: 1px solid black;
     --fuente: Roboto Mono;
-    --main-color: #3b38ff;
+    --main-color: #68518c;
     --error-color: #ff2323;
+    --prohibido: repeating-linear-gradient(-45deg,white, white 8px, red 8px, red 16px);
 }
 
 body {
@@ -12,11 +13,11 @@ body {
     height: 100vh;
     margin: 0;
     display: grid;
-    grid-template-columns: 0.5fr 2fr;
+    grid-template-columns: 2fr 0.5fr;
     grid-template-rows: 0fr 5fr 0fr;
     grid-template-areas: 
     'header header'
-    'aside main'
+    'main aside'
     'footer footer';
 }
 
@@ -36,7 +37,6 @@ aside {
     display: grid;
     justify-content: center;
     align-content: center;
-    gap: 50px;
     padding: 30px
 }
 
@@ -48,6 +48,7 @@ main {
     align-content: center;
     justify-content: center;
     gap: 10px;
+    padding: 50px;
 }
 
 footer { 
@@ -60,15 +61,15 @@ footer {
     background-color: var(--main-color);
 }
 
-footer > p {margin: 0;}
+footer > p { margin: 0 }
 
 button { 
-    width: 280px; 
-    height: 50px;
-    font-size: 15pt;
     font-family: var(--fuente);
-    border: var(--bordes);
+    font-size: 15pt;
     background-color: transparent;
+    border: var(--bordes);
+    height: minmax(min-content, 50px);
+    width: 280px; 
 }
 
 button:hover:enabled{
@@ -81,8 +82,8 @@ button:disabled{
     border-color: lightgray;
 }
 button:disabled:hover{
-    background: repeating-linear-gradient(-45deg,transparent, transparent 8px, red 8px, red 16px);
     cursor: not-allowed;
+    background: var(--prohibido);
     border-color: red;
 }
 
@@ -97,8 +98,8 @@ main > * {
     grid-template-areas: 
     'texto1 texto2'
     'input1 input2'
-    'aclaracion aclaracion'
-    'aclaracion2 aclaracion2';
+    'error error'
+    'aclaracion aclaracion';
     gap: 10px;
 } 
 
@@ -108,15 +109,15 @@ main > * {
 
 #fecha-hasta { grid-area: input2 }
 
+input { cursor: pointer }
+
 input[type="date"] { 
     color: var(--main-color);
     font-family: var(--fuente);
+    height: 50px;
     width: 200px;
-    height: minmax(50px, fit-content);
     font-size: 15pt;
 }
-
-input { cursor: pointer;}
 
 .aclaracion {
     font-size: 10pt;
@@ -124,13 +125,11 @@ input { cursor: pointer;}
     margin: 0;
 }
 
-#aclaracion{
-    grid-area: aclaracion2;
-}
+#aclaracion { grid-area: aclaracion; }
 
 #error {
     color:var(--error-color);
-    grid-area: aclaracion;
+    grid-area: error;
 }
 
 #contenedor-tipo-transporte{
@@ -141,13 +140,15 @@ input { cursor: pointer;}
 }
 
 #contenedor-tipo-transporte > input {
+    background-color: var(--main-color);
+    cursor: pointer;
+    justify-self: center;
     width: 100%;
     height: 100%;
-    justify-self: center;
-    background-color: var(--main-color);
 }
 
 #contenedor-tipo-transporte > label {
+    cursor: pointer;
     padding-left: 10px;
 }
 
@@ -156,8 +157,10 @@ input { cursor: pointer;}
     grid-column-end: -1;
 }
 
+aside > p { margin: 0; font-size: 10pt; padding-bottom: 20px;}
+
 /* BORDES */
 
-header, footer {border: var(--bordes);}
-aside{ border-left: var(--bordes); border-right: var(--bordes);}
-main { border-right: var(--bordes);}
+header, footer { border: var(--bordes) }
+main { border-left: var(--bordes); border-right: var(--bordes) }
+aside { border-right: var(--bordes) }
