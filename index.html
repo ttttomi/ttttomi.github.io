@@ -11,10 +11,10 @@
         <p>Trabajo práctico nro. 2 | Grupo 16</p>
     </header>
         <aside>
-            <button id="btn-nueva" onclick="nuevaConsulta()" style="display: none;">Generar nueva consulta</button>
-            <button id="btn-consultar" onclick="consultar()">Consultar API</button>
+            <button id="btn-nueva" onclick="nuevaConsultaBtn()" class="enabled" style="display: none;">Generar nueva consulta</button>
+            <button id="btn-consultar" onclick="consultarBtn(this)" class="enabled">Consultar API</button>
             <p id="cargando" style="visibility: hidden;">Cargando</p>
-            <button id="btn-mostrar" onclick="mostrar()" disabled>Mostrar datos</button>
+            <button id="btn-mostrar" onclick="mostrarBtn(this)" class="disabled">Mostrar datos</button>
         </aside>
         <main>
             <fieldset id="contenedor-fechas">
@@ -25,7 +25,7 @@
                 <input type="date" id="fecha-hasta" onchange="fechaValidacion(this)">
                 
                 <p class="aclaracion" id="error" style="display: none;"></p>
-                <p class="aclaracion" id="aclaracion">(si no se selecciona fecha se consultará por defecto el inicio del dataset)</p>
+                <p class="aclaracion" id="aclaracion">*si no se selecciona fecha se consultará por defecto desde el inicio del dataset hasta hoy</p>
             </fieldset>
             <fieldset id="contenedor-tipo-transporte">
                 <input type="checkbox" id="check-todo" class="check" name="check-todo" checked>
@@ -39,7 +39,7 @@
                 
                 <input type="checkbox" id="check-bondi" class="check" name="check-todo">
                 <label for="check-bondi">Bondi</label>
-                <p class="aclaracion" id="aclaracion">(si no se selecciona opción se consultará por defecto "todo")</p>
+                <p class="aclaracion" id="aclaracion">*si no se selecciona opción se consultará por defecto "todo"</p>
             </fieldset>
         </main>
     <footer>

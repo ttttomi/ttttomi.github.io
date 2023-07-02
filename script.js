@@ -5,8 +5,10 @@ function cargando(flag) {
     if (flag == "end") {
         clearInterval(carg)
         txt.innerHTML = "Consultado con éxito"
+        txt.style.color = "var(--success-color)"
         setTimeout(() => {
             txt.style.visibility = "hidden"
+            txt.style.color = "black"
         }, 2000)
     } else {
         txt.innerHTML = "Cargando"
@@ -21,11 +23,12 @@ function cargando(flag) {
 }
 
 function requestAPI(){
-    cargando()
+    cargando() //Muestro la animación que está cargando
+
     //en la HTMLCollection "checkColl" obtengo todos los Checkboxes de los tipos transportes
     let checkColl = document.getElementsByClassName("check")
     
-    //En el Array "seleccionados" guardo solo los Checkboxes de los transportes que esten seleccionados 
+    //En el Array "seleccionados" guardo solo los Checkboxes de los transportes seleccionados 
     let seleccionados = new Array
     for (let i = 0; i < checkColl.length; i++) {
         if (checkColl.item(i).checked) {
@@ -33,31 +36,35 @@ function requestAPI(){
         }
     }
 
-    //Guardo en un Array los "id" de los tipos de transportes seleccionados, que necesita la API para la consulta
-    let ids = new Array;
-    seleccionados.forEach(e => {
-        switch (e.id) {
-            case "check-todo":
-                ids.push("npogi2im")
-                break;
-                
-            case "check-tren":
-                ids.push("678arlyc")
-                break;
-                
-            case "check-subte":
-                ids.push("s9v4z3od")
-                break;
-                
-            case "check-bondi":
-                ids.push("twsi8s3j")
-                break;
-        }
-    });
-
     //Si no hay transportes seleccionados, utilizo por defecto el "id" de "todo"
+    let ids = new Array;
     if (seleccionados.length == 0) {
         ids.push("npogi2im")
+    } else {
+        //Si hay transp. seleccionados guardo en un Array sus "id", que los necesita la API para la consulta
+        seleccionados.forEach(e => {
+            switch (e.id) {
+                case "check-todo":
+                    ids.push("npogi2im")
+                    break;
+                    
+                case "check-tren":
+                    ids.push("678arlyc")
+                    break;
+                    
+                case "check-subte":
+                    ids.push("s9v4z3od")
+                    break;
+                    
+                case "check-bondi":
+                    ids.push("twsi8s3j")
+                    break;
+
+                default:
+                    ids.push("npogi2im")
+                    break;
+            }
+        });
     }
 
     //Construyo la url
@@ -75,7 +82,7 @@ function requestAPI(){
         dataType: "json",
         success: (response) => {
             cargando("end")
-            document.getElementById("btn-mostrar").disabled = false
+            document.getElementById("btn-mostrar").classList.toggle("disabled",0)
             console.log(response);
         },
         error: (error) => {
@@ -84,7 +91,7 @@ function requestAPI(){
     });
 }
 
-function fechaValidacion(elemento){
+function validarFecha(elemento){
     let today = new Date().toISOString().slice(0,10) //Fecha de hoy
     
     //Valida que la fecha para consultar no supere la fecha de hoy
@@ -110,42 +117,52 @@ function fechaValidacion(elemento){
     }
 }
 
-function consultar(){
+function resaltarError(elemento) { 
+    let parpadeo = setInterval(() => {
+        elemento.style.visibility = elemento.style.visibility === "hidden" ? "visible" : "hidden"
+    }, 100)
+    setTimeout(() => {
+        clearInterval(parpadeo)
+        elemento.style.visibility = "visible"
+    }, 1300);
+}
+
+function displayHijos(display, tagName){
+    for (let i = 0; i < document.getElementsByTagName(tagName)[0].childElementCount; i++){
+        document.getElementsByTagName(tagName)[0].children.item(i).style.display = display
+    }
+}
+
+function consultarBtn(elemento){
     let fechaIni = document.getElementById("fecha-desde")
     let fechaFin = document.getElementById("fecha-hasta")
-
+    
     //Si hay error resalta el mensaje de error, si no, ejecuta la APIRequest
-    if (fechaValidacion(fechaIni) || fechaValidacion(fechaFin)){
-        resaltarError()
+    if (validarFecha(fechaIni) || validarFecha(fechaFin)){
+        resaltarError(document.getElementById("error"))
     } else {
         requestAPI()
     }
-    
 }
 
-function resaltarError() { 
-    let err = document.getElementById("error")
-    let parpadeo = setInterval(() => {
-        err.style.visibility = err.style.visibility === "hidden" ? "visible" : "hidden"
-    }, 80)
-    setTimeout(() => {
-        clearInterval(parpadeo)
-        err.style.visibility = "visible"
-    }, 800);
+function mostrarBtn(elemento){;
+    //Si el botón "mostrar" está desactivado, resalta el botón "consultar"
+    if (elemento.classList.contains("disabled")){
+        resaltarError(document.getElementById("btn-consultar"))
+    }else {
+        //Oculto las cosas del main
+        displayHijos("none", "main")
+        //Actualizo los botones
+        document.getElementById("btn-consultar").style.display = "none"
+        document.getElementById("btn-nueva").style.display = "block"
+    }
 }
 
-
-function mostrar(){
-    document.getElementsByTagName("main")[0].children.item(0).style.display = "none"
-    document.getElementsByTagName("main")[0].children.item(1).style.display = "none"
-    document.getElementById("btn-consultar").style.display = "none"
-    document.getElementById("btn-nueva").style.display = "block"
-}
-
-function nuevaConsulta() {
+function nuevaConsultaBtn() {
+    //Muestro las cosas del main
+    displayHijos("grid","main")
+    //Actualizo los botones
     document.getElementById("btn-nueva").style.display = "none"
     document.getElementById("btn-consultar").style.display = "block"
-    document.getElementById("btn-mostrar").disabled = true
-    document.getElementsByTagName("main")[0].children.item(0).style.display = "grid"
-    document.getElementsByTagName("main")[0].children.item(1).style.display = "grid"
+    document.getElementById("btn-mostrar").classList.toggle("disabled")
 }
