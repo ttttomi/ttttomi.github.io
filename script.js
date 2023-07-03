@@ -166,8 +166,6 @@ function mostrarBtn(elemento){;
         }
 
     }
-    
-
 }
 
 function nuevaConsultaBtn() {
