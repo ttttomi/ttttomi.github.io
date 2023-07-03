@@ -22,6 +22,7 @@ function cargando(flag) {
     }
 }
 
+let resp = new Object;
 function requestAPI(){
     cargando() //Muestro la animación que está cargando
 
@@ -83,7 +84,7 @@ function requestAPI(){
         success: (response) => {
             cargando("end")
             document.getElementById("btn-mostrar").classList.toggle("disabled",0)
-            console.log(response);
+            resp = response
         },
         error: (error) => {
             console.log(error);
@@ -128,12 +129,13 @@ function resaltarError(elemento) {
 }
 
 function displayHijos(display, tagName){
-    for (let i = 0; i < document.getElementsByTagName(tagName)[0].childElementCount; i++){
-        document.getElementsByTagName(tagName)[0].children.item(i).style.display = display
+    for (let i = 0; i < document.getElementById(tagName).childElementCount; i++){
+        document.getElementById(tagName).children.item(i).style.display = display
     }
 }
 
 function consultarBtn(elemento){
+    console.log(document.getElementById("data"));
     let fechaIni = document.getElementById("fecha-desde")
     let fechaFin = document.getElementById("fecha-hasta")
     
@@ -149,16 +151,27 @@ function mostrarBtn(elemento){;
     //Si el botón "mostrar" está desactivado, resalta el botón "consultar"
     if (elemento.classList.contains("disabled")){
         resaltarError(document.getElementById("btn-consultar"))
-    }else {
-        //Oculto las cosas del main
-        displayHijos("none", "main")
-        //Actualizo los botones
+    } else { 
+        //Si el boton "mostrar" está activado, actualizo los botones
         document.getElementById("btn-consultar").style.display = "none"
         document.getElementById("btn-nueva").style.display = "block"
+
+        //Si no hay data en el main:
+        if (document.getElementById("data") == null) {
+            //Oculto las cosas del main
+            displayHijos("none", "main")
+            //Creo un elemento con la data adentro
+            document.getElementById("main").appendChild(document.createElement("p")).id = "data"
+            document.getElementById("data").innerHTML = resp.data.toString()
+        }
+
     }
+    
+
 }
 
 function nuevaConsultaBtn() {
+    document.getElementById("main").removeChild(document.getElementById("data"))
     //Muestro las cosas del main
     displayHijos("grid","main")
     //Actualizo los botones

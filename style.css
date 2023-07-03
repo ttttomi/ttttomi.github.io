@@ -25,6 +25,7 @@ body {
     'header header'
     'main aside'
     'footer footer';
+    overflow: hidden;
 }
 
 header {
@@ -47,15 +48,14 @@ aside {
     padding: 30px
 }
 
-
 main { 
     grid-area: main; 
-    
     display: grid;
     align-content: center;
     justify-content: center;
     gap: 10px;
     padding: 50px;
+    overflow-y: auto;
 }
 
 footer { 
