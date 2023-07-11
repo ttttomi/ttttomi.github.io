@@ -1,50 +1,73 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>TP-2</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
+    <!--jQuery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-</head>
-<body>
+    <!--Google charts -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- CHARTS ARGENTINA JS -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/gh/datosgobar/series-tiempo-ar-explorer@ts_components_2.9.0/dist/js/components.js"
+    ></script>
+    <!-- CHARTS ARGENTINA CSS -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/gh/datosgobar/series-tiempo-ar-explorer@ts_components_2.9.0/dist/css/components.css"
+    />
+  </head>
+  <body>
     <header>
-        <p>Trabajo práctico nro. 2 | Grupo 16</p>
+      <p>Trabajo práctico nro. 2 | Grupo 16</p>
     </header>
-        <aside>
-            <button id="btn-nueva" onclick="nuevaConsultaBtn()" class="enabled" style="display: none;">Generar nueva consulta</button>
-            <button id="btn-consultar" onclick="consultarBtn(this)" class="enabled">Consultar API</button>
-            <p id="cargando" style="visibility: hidden;">Cargando</p>
-            <button id="btn-mostrar" onclick="mostrarBtn(this)" class="disabled">Mostrar datos</button>
-        </aside>
-        <main id="main">
-            <fieldset id="contenedor-fechas">
-                <p id="texto-desde">Desde</p>
-                <input type="date" id="fecha-desde" onchange="validarFecha(this)">
-                
-                <p id="texto-hasta">Hasta</p>
-                <input type="date" id="fecha-hasta" onchange="validarFecha(this)">
-                
-                <p class="aclaracion" id="error" style="display: none;"></p>
-                <p class="aclaracion" id="aclaracion">*si no se selecciona fecha se consultará por defecto desde el inicio del dataset hasta hoy</p>
-            </fieldset>
-            <fieldset id="contenedor-tipo-transporte">
-                <input type="checkbox" id="check-todo" class="check" name="check-todo" checked>
-                <label for="check-todo">Todo</label>
-                
-                <input type="checkbox" id="check-tren" class="check" name="check-todo">
-                <label for="check-tren">Tren</label>
-                
-                <input type="checkbox" id="check-subte" class="check" name="check-todo">
-                <label for="check-subte">Subte</label>
-                
-                <input type="checkbox" id="check-bondi" class="check" name="check-todo">
-                <label for="check-bondi">Bondi</label>
-                <p class="aclaracion" id="aclaracion">*si no se selecciona opción se consultará por defecto "todo"</p>
-            </fieldset>
-        </main>
+    <aside>
+      <button id="btn-nueva" onclick="nuevaConsultaBtn()" class="enabled" style="display: none">Generar nueva consulta</button>
+      <button id="btn-consultar" onclick="consultarBtn(this)" class="enabled">Consultar API</button>
+      <p id="cargando" style="visibility: hidden">Cargando</p>
+      <button id="btn-mostrar" onclick="mostrarBtn(this)" class="disabled">Mostrar datos</button>
+    </aside>
+    <main id="main">
+      <fieldset id="contenedor-fechas">
+        <p id="texto-desde">Desde</p>
+        <input type="date" id="fecha-desde" onchange="validarFecha(this)" />
+
+        <p id="texto-hasta">Hasta</p>
+        <input type="date" id="fecha-hasta" onchange="validarFecha(this)" />
+
+        <p class="aclaracion" id="error-msg" style="display: none"></p>
+        <p class="aclaracion" id="aclaracion">
+          *si no se selecciona fecha se consultará por defecto desde el inicio del dataset hasta hoy
+        </p>
+      </fieldset>
+      <fieldset id="contenedor-tipo-transporte">
+        <input type="checkbox" id="check-todo" class="check" name="todo" checked />
+        <label for="check-todo">Todo</label>
+
+        <input type="checkbox" id="check-tren" class="check" name="tren" />
+        <label for="check-tren">Tren</label>
+
+        <input type="checkbox" id="check-subte" class="check" name="subte" />
+        <label for="check-subte">Subte</label>
+
+        <input type="checkbox" id="check-bondi" class="check" name="bondi" />
+        <label for="check-bondi">Bondi</label>
+        <p class="aclaracion" id="aclaracion">*si no se selecciona opción se consultará por defecto "todo"</p>
+      </fieldset>
+      <fieldset id="contenedor-charts" style="display: none">
+        <div id="chart_div"></div>
+      </fieldset>
+    </main>
     <footer>
-        <p>Tecnología y Gestión Web</p>
+      <p>Tecnología y Gestión Web</p>
     </footer>
+
     <script src="./script.js"></script>
-</body>
+    <script src="./apiRequests.js"></script>
+    <script src="./charts.js"></script>
+    <script src="./chartsArg.js"></script>
+  </body>
 </html>
