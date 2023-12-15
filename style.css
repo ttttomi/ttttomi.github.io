@@ -1,0 +1,12 @@
+body {
+  cursor: none;
+  margin: 0;
+}
+
+#raspadita {
+  height: 30vh;
+}
+
+#container {
+  height: 100vh;
+}
