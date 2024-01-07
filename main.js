@@ -3,7 +3,7 @@ import { OBJLoader } from "three/addons/loaders/OBJLoader.js";
 import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
 
 const loader = new OBJLoader();
-const OBJECT = "assets/moneda.obj";
+const OBJECT = "./assets/moneda.obj";
 const ENVIRONMENT = "./assets/env.hdr";
 
 // load a resource
@@ -24,11 +24,6 @@ loader.load(
 
     //Material metálico
     moneda.children[0].material = new THREE.MeshStandardMaterial({
-      metalness: 1,
-      roughness: 0.1,
-      color: 0xffec00,
-    });
-    moneda.children[1].material = new THREE.MeshStandardMaterial({
       metalness: 1,
       roughness: 0.1,
       color: 0xffec00,
@@ -86,8 +81,6 @@ loader.load(
 
       new RGBELoader().load(ENVIRONMENT, (texture) => {
         moneda.children[0].material.envMap =
-          envMapLoader.fromCubemap(texture).texture;
-        moneda.children[1].material.envMap =
           envMapLoader.fromCubemap(texture).texture;
       });
       /*************************************************/
