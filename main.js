@@ -3,7 +3,7 @@ import { OBJLoader } from "three/addons/loaders/OBJLoader.js";
 import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
 
 const loader = new OBJLoader();
-const OBJECT = "assets/tomi.obj";
+const OBJECT = "assets/moneda.obj";
 const ENVIRONMENT = "./assets/env.hdr";
 
 // load a resource
