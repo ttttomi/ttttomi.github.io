@@ -1,0 +1,22 @@
+:root {
+  --main-white: blue;
+  --main-black: black;
+}
+
+body {
+  cursor: none;
+  margin: 0;
+  color: var(--main-black);
+}
+
+#container {
+  height: 100vh;
+  position: absolute;
+  z-index: 1;
+}
+
+#raspadita {
+  height: 30vh;
+  margin-top: 35vh;
+  margin-left: 20vw;
+}
