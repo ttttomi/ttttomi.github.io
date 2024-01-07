@@ -4,10 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite ./dist",
     "build": "vite build",
     "preview": "vite preview",
-    "build": "gh-pages -d dis"
+    "build": "gh-pages -d dist"
   },
   "devDependencies": {
     "vite": "^5.0.8"
